@@ -3,7 +3,7 @@
 
  const create = async (req, res) => {
     try {
-        const { id } = nanoid(16)
+        const id = nanoid(16)
 
         const { 
             nama,
@@ -79,10 +79,12 @@
     }
  }
 
-
-
+ const login = async (req, res) => {
+    
+ }
 
  module.exports = {
     create,
-    edit
+    edit,
+    login
  }
