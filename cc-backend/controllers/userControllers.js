@@ -1,9 +1,9 @@
  const { nanoid } = require('nanoid');
- const {  User } = require('../db/models')
+ const { User } = require('../db/models')
 
  const create = async (req, res) => {
     try {
-        const id = nanoid(16)
+        const id = nanoid(10)
 
         const { 
             nama,

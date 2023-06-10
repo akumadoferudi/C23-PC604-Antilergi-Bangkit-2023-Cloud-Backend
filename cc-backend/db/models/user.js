@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     id: DataTypes.STRING,
-    nama: {
+    username: {
       type: DataTypes.STRING,
       validate: {
         max: 10
@@ -34,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         min: 8,
-        
       }
     }
   }, {
