@@ -3,41 +3,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn('article_allergy', 'articleId', {
+    await queryInterface.addColumn('Article_Allergies', 'articleId', {
       type: Sequelize.INTEGER,
       references: {
-        model: 'article',
-        key: 'Id'
+        model: 'Articles',
+        key: 'id'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE' 
     });
 
-    await queryInterface.addColumn('article_allergy', 'allergyId', {
+    await queryInterface.addColumn('Article_Allergies', 'allergyId', {
       type: Sequelize.INTEGER,
       references: {
-        model: 'allergy',
-        key: 'Id'
+        model: 'Allergies',
+        key: 'id'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE' 
     });
 
-    await queryInterface.addColumn('article_symptom', 'articleId', {
+    await queryInterface.addColumn('Article_Symptoms', 'articleId', {
       type: Sequelize.INTEGER,
       references: {
-        model: 'article',
-        key: 'Id'
+        model: 'Articles',
+        key: 'id'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE' 
     });
 
-    await queryInterface.addColumn('article_symptom', 'symtompId', {
+    await queryInterface.addColumn('Article_Symptoms', 'symtompId', {
       type: Sequelize.INTEGER,
       references: {
-        model: 'symtomp',
-        key: 'Id'
+        model: 'Symptoms',
+        key: 'id'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE' 
@@ -45,9 +45,9 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('article_allergy', 'articleId', {});
-    await queryInterface.removeColumn('article_allergy', 'allergyId', {});
-    await queryInterface.removeColumn('article_symptom', 'articleId', {});
-    await queryInterface.removeColumn('article_symptom', 'symtompId', {});
+    await queryInterface.removeColumn('Article_Allergies', 'articleId', {});
+    await queryInterface.removeColumn('Article_Allergies', 'allergyId', {});
+    await queryInterface.removeColumn('Article_Symptoms', 'articleId', {});
+    await queryInterface.removeColumn('Article_Symptoms', 'symtompId', {});
   }
 };
