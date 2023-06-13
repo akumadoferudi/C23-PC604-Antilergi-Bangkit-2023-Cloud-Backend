@@ -13,10 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Article.hasMany(models.Article_Allergy, {
-        foreignKey: 'allergyId'
+        foreignKey: 'articleId'
       })
       Article.hasMany(models.Article_Symptom, {
-        foreignKey: 'symtompId'
+        foreignKey: 'articleId'
+      })
+      Article.hasMany(models.Article_Link, {
+        foreignKey: 'articleId'
       })
     }
   }
@@ -24,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
+    symptom_desc: DataTypes.STRING,
     reason: DataTypes.STRING,
     solution: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Article',
   });
   return Article;
