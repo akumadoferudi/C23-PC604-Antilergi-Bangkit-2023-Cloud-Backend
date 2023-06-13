@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     allergyId: DataTypes.INTEGER
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Article_Allergy',
   });
   return Article_Allergy;
