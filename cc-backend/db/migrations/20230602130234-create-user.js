@@ -18,6 +18,10 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      API_Key: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,5 +1,6 @@
- const { nanoid } = require('nanoid');
+ const { nanoid } = require('nanoid')
  const { User } = require('../db/models')
+ const bcrypt = require('bcrypt')
 
  const create = async (req, res) => {
     try {
@@ -79,12 +80,48 @@
     }
  }
 
- const login = async (req, res) => {
+ const generateApiKey = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const salt = bcrypt.genSalt(10)
+        const checkAccount = await User.findOne({
+            where: { email: email }
+        })
+
+        if (!checkAccount) throw Error('user tidak ditemukan!')
+
+        checkPassword = await bcrypt.compare(password, checkAccount.password)
+
+        if (!checkPassword) throw Error('user tidak ditemukan!')
+
+
+
+        const validUser = await checkAccount.update({
+
+        })
+
+        res
+        .status(200)
+        .json({
+            status: 'ok',
+            data: checkAccount
+        })
+
+    } catch (err) {
+        console.log(err)
+
+        res
+        .status(404)
+        .json({
+            status: 'fail',
+            message: err.message
+        })
+    }
     
  }
 
  module.exports = {
     create,
     edit,
-    login
+    generateApiKey
  }

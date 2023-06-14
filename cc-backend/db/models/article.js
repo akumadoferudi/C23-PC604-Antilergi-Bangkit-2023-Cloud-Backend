@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const articleallergy = require('./articleallergy');
+// const Article_Allergy = require('./article_allergy');
 module.exports = (sequelize, DataTypes) => {
   class Article extends Model {
     /**
@@ -12,12 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Article.hasMany(models.Article_Allergy, {
-        foreignKey: 'articleId'
-      })
-      Article.hasMany(models.Article_Symptom, {
-        foreignKey: 'articleId'
-      })
+      // Article.belongsToMany(models.Allergy, { through: Article_Allergy })
+      // Article.belongsToMany(models.Symptom, { through: Article_Symptom })
+      // Article.belongsToMany(models.Link, { through: Article_Link })
       Article.hasMany(models.Article_Link, {
         foreignKey: 'articleId'
       })
@@ -26,10 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   Article.init({
     image: DataTypes.STRING,
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    symptom_desc: DataTypes.STRING,
-    reason: DataTypes.STRING,
-    solution: DataTypes.STRING
+    description: DataTypes.TEXT,
+    allergy: DataTypes.TEXT,
+    symptom: DataTypes.TEXT,
+    reason: DataTypes.TEXT,
+    solution: DataTypes.TEXT
   }, {
     sequelize,
     timestamps: false,

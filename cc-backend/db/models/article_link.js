@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Article_Link.belongsTo(models.Article, {
         foreignKey: 'articleId'
       })
-      Article_Link.belongsTo(models.Resources_Link, {
+      Article_Link.belongsTo(models.Link, {
         foreignKey: 'linkId'
       })
     }
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     linkId: DataTypes.INTEGER
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Article_Link',
   });
   return Article_Link;

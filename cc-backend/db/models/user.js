@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     username: {
       type: DataTypes.STRING,
       validate: {
@@ -35,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 8,
       }
+    },
+    API_Key: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,

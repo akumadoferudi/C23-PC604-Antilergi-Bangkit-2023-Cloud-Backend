@@ -6,6 +6,6 @@ const {
 } = require('../controllers/articleControllers')
 
 
-articleRoutes.route('/').get(listArticles)
+articleRoutes.route('/search').get(listArticles)
 
-module.exports = router
+module.exports = articleRoutes
