@@ -1,32 +1,16 @@
 const express = require('express')
 const app = express()
-// const { Sequelize } = require('sequelize')
 require('dotenv').config()  // for read env file
 const router = require('./routers/routes')
-const HOST = process.env.HOST || 'localhost'
-const PORT = process.env.PORT || 8000
+const articleRoutes = require('./routers/articleRoutes')
+const userRoutes = require('./routers/userRoutes')
+PORT = 8080
+HOST = 'localhost'
 
-// db env
-// const db = process.env.DB || 'antilergi'
-// const username = process.env.USERNAME || 'admin'
-// const password = process.env.PASSWORD || 'admin123'
-// const dbHost = process.env.DBHOST || 'localhost'
-// const dbDriver = process.env.DBDRIVER || 'mysql'
-
-// connect to DB orm
-// const sequelize = new Sequelize('antilergi', 'user', 'password', {
-//     host: 'dbHost',
-//     dialect: 'dbDriver',
-//   })
-
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-
-app.use('/', router)
+// app.use('/', router)
+app.use(express.json())
+app.use('/articles/', articleRoutes)
+app.use('/user/', userRoutes)
 
 // app.get('/', function (req, res) {
 //   res.send('Hello World')

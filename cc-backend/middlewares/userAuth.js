@@ -1,13 +1,8 @@
 const { User } = require('../db/models')
 
-const auth = async (req, res, next) => {
+const loginAuth = async (req, res, next) => {
     try {
-        const { email, password } = req.body
-        const checkAccount = await User.findOne({
-            where: { email: email }
-        })
-
-        if (!checkAccount) throw Error('user tidak ditemukan!')
+        
 
         next();
 
@@ -22,5 +17,5 @@ const auth = async (req, res, next) => {
         })
     }
  }
-module.exports = { auth }
+module.exports = { loginAuth }
 

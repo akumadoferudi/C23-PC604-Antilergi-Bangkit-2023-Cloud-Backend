@@ -16,16 +16,19 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
-      }, 
-      symptom_desc: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
+      },
+      allergy: {
+        type: Sequelize.TEXT
+      },
+      symptom: {
+        type: Sequelize.TEXT
       },
       reason: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       solution: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
