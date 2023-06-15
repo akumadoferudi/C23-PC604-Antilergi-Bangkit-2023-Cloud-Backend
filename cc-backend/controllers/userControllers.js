@@ -1,20 +1,47 @@
  const { nanoid } = require('nanoid')
  const { User } = require('../db/models')
  const bcrypt = require('bcrypt')
+ const jwt = require('jsonwebtoken')
+//  const { generateApiKey } = require('generate-api-key');
+
+const userLists = async (req, res) => {
+    try {
+        const users = await User.findAll()
+
+        res
+        .status(200)
+        .json({
+            status: 'ok',
+            data: users
+        })
+        .end()
+    } catch (err) {
+        res
+        .status(500)
+        .json({
+            status: 'fail',
+            message: err.message
+        })
+        .end()
+    }
+}
 
  const create = async (req, res) => {
     try {
-        const id = nanoid(10)
+        const salt = bcrypt.genSaltSync(5)
+        const id = salt + nanoid(10)
+
+        console.log('salt: ' + salt)
 
         const { 
-            nama,
+            username,
             email,
             password 
         } = req.body
 
         await User.create({
             id,
-            nama,
+            username,
             email,
             password
         })
@@ -47,14 +74,13 @@
         if (!user) throw Error('user tidak ditemukan!')
 
         const { 
-            nama,
+            username,
             email,
             password
         } = req.body
 
-
         await user.update({
-            nama,
+            username,
             email,
             password
         })
@@ -80,31 +106,31 @@
     }
  }
 
- const generateApiKey = async (req, res) => {
+ const generateApiLogin = async (req, res) => {
     try {
         const { email, password } = req.body
-        const salt = bcrypt.genSalt(10)
         const checkAccount = await User.findOne({
-            where: { email: email }
+            where: { email }
         })
+        console.log('pass: ' + password)
 
-        if (!checkAccount) throw Error('user tidak ditemukan!')
+        if (!checkAccount) throw Error('user tidak ditemukan! (email salah)')
 
-        checkPassword = await bcrypt.compare(password, checkAccount.password)
+        const checkPassword = await bcrypt.compare(password, checkAccount.password)
+        console.log('pass_hash: ' + checkAccount.password)
+        console.log('test: ' + checkPassword)
 
-        if (!checkPassword) throw Error('user tidak ditemukan!')
+        if (!checkPassword) throw Error('user tidak ditemukan! (password salah)')
 
-
-
-        const validUser = await checkAccount.update({
-
-        })
+        const apiToken = jwt.sign({ userId : checkAccount.id }, 'secretKey',
+            { expiresIn: '1d' })
+        const validUser = await checkAccount.update({ API_Key: apiToken })
 
         res
         .status(200)
         .json({
             status: 'ok',
-            data: checkAccount
+            data: validUser
         })
 
     } catch (err) {
@@ -117,11 +143,40 @@
             message: err.message
         })
     }
-    
+ }
+ 
+ const logout = async (req, res) => {
+    const { id } = req.params
+    try {
+        const token = jwt.verify(id, 'secretKey')
+        if (!token) throw Error('Anda belum login!')
+        else if (id !== token.userId) throw Error('User tidak ditemukan')
+        
+        const user = await User.findOne({
+            where: { id: token.userId }
+        })
+        if (!user) throw Error('User tidak ditemukan')
+
+        await user.update({
+            API_Key: ''
+        })
+
+    } catch (err) {
+        console.log(err)
+
+        res
+        .status(404)
+        .json({
+            status: 'fail',
+            message: err.message
+        })
+    }
  }
 
  module.exports = {
+    userLists,
     create,
     edit,
-    generateApiKey
+    generateApiLogin,
+    logout
  }
