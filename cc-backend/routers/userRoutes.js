@@ -1,17 +1,18 @@
 const express = require('express')
 const userRoutes = express.Router()
 const  {
+    userLists,
     create,
     edit,
-    generateApiKey
+    generateApiLogin
 } = require('../controllers/userControllers')
-// const { auth } = require('../middlewares/loginAuth')
+const { userAuth } = require('../middlewares/userAuth')
 
 // const { helloWorld } = require('../controllers/helloWorld')
-
+userRoutes.route('/lists').get(userLists)
 userRoutes.route('/create').post(create)
-userRoutes.route('/:id').put(edit)
-userRoutes.route('/login').post(generateApiKey)
+userRoutes.route('/:id').put(userAuth, edit)
+userRoutes.route('/login').post(generateApiLogin)
 
 
 module.exports = userRoutes

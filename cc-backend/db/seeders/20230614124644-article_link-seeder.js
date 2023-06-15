@@ -10,6 +10,8 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('Article_Links', 'Article_Links_articleId_foreign_idx')
+    await queryInterface.removeConstraint('Article_Links', 'Article_Links_linkId_foreign_idx')
     await queryInterface.bulkDelete('Article_Links', null, {});
   }
 };

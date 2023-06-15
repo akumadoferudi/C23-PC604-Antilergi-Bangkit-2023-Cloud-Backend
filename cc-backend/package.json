@@ -14,12 +14,13 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "generate-api-key": "^1.0.2",
+    "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.3.1",
     "nanoid": "^3.3.6",
     "sequelize": "^6.31.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
-    "sequelize-cli": "^6.6.1"
+    "nodemon": "^2.0.22"
   }
 }
