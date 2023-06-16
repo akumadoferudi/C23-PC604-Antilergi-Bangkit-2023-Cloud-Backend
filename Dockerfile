@@ -12,6 +12,7 @@ RUN npm install
 COPY . .
 
 # RUN db migration command
+RUN npx sequelize-cli db:migrate:undo:all
 RUN npx sequelize-cli db:migrate
 RUN npx sequelize-cli db:seed:all
 

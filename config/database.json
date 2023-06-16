@@ -1,24 +1,23 @@
 {
   "development": {
-    "username": "c23-pc604-antilergi",
+    "username": "root",
     "password": "c23-pc604-antilergi",
     "database": "antilergi",
-    "host": "127.0.0.1",
+    "host": "34.128.103.119",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "c23-pc604-antilergi",
     "database": "antilergi",
-    "host": "127.0.0.1",
-    "port": 3306,
+    "host": "34.128.103.119",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "c23-pc604-antilergi",
+    "database": "antilergi",
+    "host": "34.128.103.119",
     "dialect": "mysql"
   }
 }
